@@ -28,7 +28,8 @@ import static org.springframework.data.couchbase.core.mapping.id.GenerationStrat
 public class User implements UserDetails {
 
 
-    @Id @GeneratedValue(strategy = UNIQUE)
+    @Id
+    @GeneratedValue(strategy = UNIQUE)
     private String id;
     private String firstName;
     private String lastName;

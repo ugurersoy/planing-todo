@@ -12,11 +12,11 @@ import java.util.Optional;
 
 @Repository
 public interface ToDoRepository extends CouchbaseRepository<ToDo, String>{
-    Page<ToDo> findByStatusAndUserId(ToDoStatus status,String id, Pageable pageable);
+    Page<ToDo> findAllByStatusAndUserId(String status,String id, Pageable pageable);
 
     Page<ToDo> findAllByUserId(String id, Pageable pageable);
 
-    Optional<ToDo> findByIdAndUserId(String id, String id1);
+    Optional<ToDo> findByIdAndUserId(String id, String userId);
 
-    void deleteByIdAndUserId(String id, String id1);
+    void deleteByIdAndUserId(String id, String userId);
 }

@@ -81,7 +81,7 @@ public class ToDoController extends BaseController {
         return ResponseEntity.ok(toDoService.getById(id, getCurrentUser()));
     }
 
-    @GetMapping("/{status}")
+    @GetMapping("/status/{status}")
     @Operation(
             summary = "Get ToDo list by status and user",
             description = "Fetches a paginated list of ToDo items for the current user filtered by a specific status. " +

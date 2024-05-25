@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -34,39 +36,49 @@ public class ToDoService {
     public String updateTodo(ToDoUpdateRequestDTO toDoUpdateRequestDTO) {
         log.info("update process started");
         ToDo toDo = toDoRepository.findById(toDoUpdateRequestDTO.getId())
-                .orElseThrow(() -> new DataNotFoundException("This item could not be found :"+toDoUpdateRequestDTO.getId()));
-        toDo.setDescription(toDoUpdateRequestDTO.getDescription());
-        toDo.setTitle(toDoUpdateRequestDTO.getTitle());
-        toDo.setStatus(toDoUpdateRequestDTO.getStatus());
+                .orElseThrow(() -> new DataNotFoundException("This item could not be found :" + toDoUpdateRequestDTO.getId()));
+        setExistingDataFromDto(toDoUpdateRequestDTO, toDo);
         return toDoRepository.save(toDo).getId();
     }
 
-    public ToDoResponseDTO getById(String id,User user){
+    public ToDoResponseDTO getById(String id, User user) {
         log.info("getById process started");
-        return toDoRepository.findByIdAndUserId(id,user.getId()).map(ToDo::toToDoResponseDTO)
+        return toDoRepository.findByIdAndUserId(id, user.getId()).map(ToDo::toToDoResponseDTO)
                 .orElseThrow(() -> new DataNotFoundException("This item could not be found by this id and this user:"));
     }
 
-    public void deleteById(String id,User user){
+    public void deleteById(String id, User user) {
         log.info("delete process started");
-        toDoRepository.deleteByIdAndUserId(id,user.getId());
+        toDoRepository.deleteByIdAndUserId(id, user.getId());
     }
 
-    public Page<ToDoResponseDTO> getToDoListAll(Pageable pageable,User user) {
+    public Page<ToDoResponseDTO> getToDoListAll(Pageable pageable, User user) {
         log.info("get todo list all process started");
-        Page<ToDo> toDoList = toDoRepository.findAllByUserId(user.getId(),pageable);
+        Page<ToDo> toDoList = toDoRepository.findAllByUserId(user.getId(), pageable);
         return getToDoResponseDTOS(toDoList);
     }
 
-    public Page<ToDoResponseDTO> getToDoListWithStatus(Pageable pageable, ToDoStatus status,User user) {
+    public Page<ToDoResponseDTO> getToDoListWithStatus(Pageable pageable, ToDoStatus status, User user) {
         log.info("getToDoListWithStatus process started");
-        Page<ToDo> toDoList = toDoRepository.findByStatusAndUserId(status,user.getId(), pageable);
+        Page<ToDo> toDoList = toDoRepository.findAllByStatusAndUserId(status.getValue(), user.getId(), pageable);
         return getToDoResponseDTOS(toDoList);
     }
 
-    private static PageImpl<ToDoResponseDTO> getToDoResponseDTOS(Page<ToDo> toDoList) {
+    private PageImpl<ToDoResponseDTO> getToDoResponseDTOS(Page<ToDo> toDoList) {
         List<ToDoResponseDTO> toDoResponseDTO = toDoList.stream().map(ToDo::toToDoResponseDTO).toList();
         return new PageImpl<>(toDoResponseDTO, toDoList.getPageable(), toDoList.getTotalElements());
+    }
+
+    private void setExistingDataFromDto(ToDoUpdateRequestDTO toDoUpdateRequestDTO, ToDo toDo) {
+        if (nonNull(toDoUpdateRequestDTO.getDescription())) {
+            toDo.setDescription(toDoUpdateRequestDTO.getDescription());
+        }
+        if (nonNull(toDoUpdateRequestDTO.getTitle())) {
+            toDo.setTitle(toDoUpdateRequestDTO.getTitle());
+        }
+        if (nonNull(toDoUpdateRequestDTO.getStatus())) {
+            toDo.setStatus(toDoUpdateRequestDTO.getStatus());
+        }
     }
 
 

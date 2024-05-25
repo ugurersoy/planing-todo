@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
+
     @PostMapping("/register")
     @Operation(summary = "User Registration",
             description = "Registers a new user with the provided details")
@@ -31,7 +32,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "400", description = "Invalid request details")
     })
     public ResponseEntity<AuthenticationResponseDTO>
-    register(@RequestBody RegisterRequestDTO request){
+    register(@RequestBody RegisterRequestDTO request) {
         log.info("Request to register process started with: {}", request);
         return ResponseEntity.ok(authenticationService.register(request));
     }
@@ -44,7 +45,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "401", description = "Unauthorized access")
     })
     public ResponseEntity<AuthenticationResponseDTO>
-    register(@RequestBody AuthenticationRequestDTO request){
+    register(@RequestBody AuthenticationRequestDTO request) {
         log.info("Request to authentication process started with: {}", request);
         return ResponseEntity.ok(authenticationService.authenticate(request));
 

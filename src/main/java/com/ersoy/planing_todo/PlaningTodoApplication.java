@@ -7,8 +7,8 @@ import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepos
 @SpringBootApplication
 public class PlaningTodoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PlaningTodoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PlaningTodoApplication.class, args);
+    }
 
 }

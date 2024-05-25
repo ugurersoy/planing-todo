@@ -62,10 +62,10 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
     @Override
     public void configureRepositoryOperationsMapping(RepositoryOperationsMapping baseMapping) {
         try {
-            CouchbaseTemplate personTemplate = myCouchbaseTemplate(myCouchbaseClientFactory("todo"),new MappingCouchbaseConverter());
-            baseMapping.mapEntity(ToDo.class,  personTemplate);
-            CouchbaseTemplate userTemplate = myCouchbaseTemplate(myCouchbaseClientFactory("todo"),new MappingCouchbaseConverter());
-            baseMapping.mapEntity(User.class,  userTemplate);
+            CouchbaseTemplate personTemplate = myCouchbaseTemplate(myCouchbaseClientFactory("todo"), new MappingCouchbaseConverter());
+            baseMapping.mapEntity(ToDo.class, personTemplate);
+            CouchbaseTemplate userTemplate = myCouchbaseTemplate(myCouchbaseClientFactory("todo"), new MappingCouchbaseConverter());
+            baseMapping.mapEntity(User.class, userTemplate);
             // everything else goes in getBucketName()
         } catch (Exception e) {
             throw e;
@@ -83,6 +83,6 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
     // do not use couchbaseClientFactory for the name of this method, otherwise the value of that bean will
 // will be used instead of this call being made ( bucketname is an arg here, instead of using bucketName() )
     public CouchbaseClientFactory myCouchbaseClientFactory(String bucketName) {
-        return new SimpleCouchbaseClientFactory(getConnectionString(),authenticator(), bucketName );
+        return new SimpleCouchbaseClientFactory(getConnectionString(), authenticator(), bucketName);
     }
 }

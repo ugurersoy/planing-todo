@@ -16,7 +16,7 @@ public abstract class BaseController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails userDetails) {
             String username = userDetails.getUsername();
-            User user = userRepository.findByEmail(username).orElseThrow(()->new UsernameNotFoundException("User not found by this email: " + username));
+            User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found by this email: " + username));
             if (user != null) {
                 return user;
             } else {

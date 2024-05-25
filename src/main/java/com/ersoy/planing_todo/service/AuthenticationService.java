@@ -38,7 +38,7 @@ public class AuthenticationService {
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
 
-        log.info("user created successfully  user: {}",user);
+        log.info("user created successfully  user: {}", user);
         return AuthenticationResponseDTO.builder().token(jwtToken).build();
     }
 
@@ -49,7 +49,7 @@ public class AuthenticationService {
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         var jwtToken = jwtService.generateToken(user);
 
-        log.info("Token created for this user: {}",user);
+        log.info("Token created for this user: {}", user);
         return AuthenticationResponseDTO.builder().token(jwtToken).build();
     }
 }
