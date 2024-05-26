@@ -23,10 +23,10 @@ This basic todo app created by using Java and Spring Boot. It uses Couchbase as 
 3. **Running the Application with its Dependencies:**
   * Go to the project directory.
   * run the "docker-compose up" on terminal
-  The project will be ready for testing and running
+  The project will be ready for testing and running.
   The application will be available at [http://localhost:8080]
 
-  You should be create a user acount from register Api localhost:8080/api/v1/auth/register
+  You should be create a user acount from register Api "localhost:8080/api/v1/auth/register"
    request body should be 
   " {
     "fistName": "",
@@ -40,6 +40,6 @@ This basic todo app created by using Java and Spring Boot. It uses Couchbase as 
 
   ## API Documentation
   I used swagger for api documentation after starting app you can check the all endpoind from;
-   http://localhost:8080/swagger-ui/index.html#/
+   "http://localhost:8080/swagger-ui/index.html#/"
   Not: you should be use token for testing end point on the swagger. 
      
