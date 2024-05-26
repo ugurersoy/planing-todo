@@ -1,6 +1,5 @@
 package com.ersoy.planing_todo.config;
 
-
 import com.couchbase.client.core.msg.kv.DurabilityLevel;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;

@@ -1,6 +1,6 @@
 spring:
   couchbase:
-    connection-string: couchbase://${COUCHBASE_HOST}:${COUCHBASE_PORT}
+    connection-string: couchbase://couchbase
     username: admin
     password: password
     auto-index: true

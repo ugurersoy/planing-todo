@@ -1,0 +1,6 @@
+FROM couchbase:latest
+COPY entrypoint.sh /opt/couchbase/entrypoint.sh
+RUN chmod +x /opt/couchbase/entrypoint.sh
+ENTRYPOINT ["/opt/couchbase/entrypoint.sh"]
+
+
