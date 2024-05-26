@@ -39,7 +39,7 @@ This basic todo app created by using Java and Spring Boot. It uses Couchbase as 
    after registiration you can use the localhost:8080/api/v1/auth/authentication endpoind for token 
 
   ## API Documentation
-  I used swagger for api documentation after starting app you can check the all endpoind from;
+  I used swagger for api documentation. After starting app you can check the all endpoinds from;
    "http://localhost:8080/swagger-ui/index.html#/"
-  Please note: you should be use token for testing end point on the swagger. 
+  Please note: you should be use token for testing endpoints on the swagger. 
      
