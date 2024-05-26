@@ -1,15 +1,3 @@
 spring:
-  couchbase:
-    connection-string: couchbase://127.0.0.1
-    username: admin
-    password: password
-    auto-index: true
-    bucket:
-      bucket-name: todo
-
-
-application:
-  security:
-    jwt:
-      secret-key: 4cab894e370834b2c11f58571dff66d92cd8dd1ad78c6e945fcaeca3b80b0c7b
-      expiration: 86400000 # a day
+  profiles:
+    active: dev
