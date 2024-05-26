@@ -41,5 +41,5 @@ This basic todo app created by using Java and Spring Boot. It uses Couchbase as 
   ## API Documentation
   I used swagger for api documentation after starting app you can check the all endpoind from;
    "http://localhost:8080/swagger-ui/index.html#/"
-  Not: you should be use token for testing end point on the swagger. 
+  Please note: you should be use token for testing end point on the swagger. 
      
