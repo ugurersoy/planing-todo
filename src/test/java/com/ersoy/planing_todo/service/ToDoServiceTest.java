@@ -7,6 +7,7 @@ import com.ersoy.planing_todo.domain.model.ToDo;
 import com.ersoy.planing_todo.domain.enums.ToDoStatus;
 import com.ersoy.planing_todo.domain.model.User;
 import com.ersoy.planing_todo.repository.ToDoRepository;
+import com.ersoy.planing_todo.service.ToDoService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

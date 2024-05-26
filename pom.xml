@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.ersoy</groupId>
 	<artifactId>planing-todo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>planing-todo</name>
 	<description>To Do Planing Basic App</description>
 	<properties>

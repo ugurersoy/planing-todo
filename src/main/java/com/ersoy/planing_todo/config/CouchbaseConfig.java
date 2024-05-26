@@ -1,10 +1,14 @@
 package com.ersoy.planing_todo.config;
 
+
+import com.couchbase.client.core.msg.kv.DurabilityLevel;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.manager.bucket.BucketSettings;
+import com.couchbase.client.java.manager.bucket.BucketType;
 import com.ersoy.planing_todo.domain.model.ToDo;
 import com.ersoy.planing_todo.domain.model.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,17 +16,11 @@ import org.springframework.data.couchbase.CouchbaseClientFactory;
 import org.springframework.data.couchbase.SimpleCouchbaseClientFactory;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
-import org.springframework.data.couchbase.core.ReactiveCouchbaseTemplate;
-import org.springframework.data.couchbase.core.convert.CouchbaseCustomConversions;
 import org.springframework.data.couchbase.core.convert.MappingCouchbaseConverter;
-import org.springframework.data.couchbase.core.mapping.CouchbaseMappingContext;
-import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories;
-import org.springframework.data.couchbase.repository.config.ReactiveRepositoryOperationsMapping;
+
 import org.springframework.data.couchbase.repository.config.RepositoryOperationsMapping;
 
-import java.util.Collections;
-
-
+@Slf4j
 @Configuration
 public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 
@@ -72,7 +70,6 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
         }
     }
 
-
     // do not use couchbaseTemplate for the name of this method, otherwise the value of that been
     // will be used instead of the result from this call (the client factory arg is different)
     public CouchbaseTemplate myCouchbaseTemplate(CouchbaseClientFactory couchbaseClientFactory,
@@ -84,5 +81,19 @@ public class CouchbaseConfig extends AbstractCouchbaseConfiguration {
 // will be used instead of this call being made ( bucketname is an arg here, instead of using bucketName() )
     public CouchbaseClientFactory myCouchbaseClientFactory(String bucketName) {
         return new SimpleCouchbaseClientFactory(getConnectionString(), authenticator(), bucketName);
+    }
+
+
+    @Bean
+    public Bucket getCouchbaseBucket(Cluster cluster){
+        //Creates the bucket if it does not exist yet
+        if( !cluster.buckets().getAllBuckets().containsKey(bucketName)) {
+            cluster.buckets().createBucket(
+                    BucketSettings.create(bucketName)
+                            .bucketType(BucketType.COUCHBASE)
+                            .minimumDurabilityLevel(DurabilityLevel.NONE)
+                            .ramQuotaMB(128));
+        }
+        return cluster.bucket(bucketName);
     }
 }
