@@ -8,7 +8,7 @@ This basic todo app created by using Java and Spring Boot. It uses Couchbase as 
 - Swagger
 - Maven
 - Docker
-- JUnit ve Mockito
+- JUnit and Mockito
 
 ## Build and Test App
 
